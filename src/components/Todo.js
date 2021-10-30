@@ -5,7 +5,7 @@ function Todo (props) {
   // 2) logic
   function handleDeleteClick (e) {
     e.preventDefault()
-    props.removeTaskById(props.id)
+    props.removeTaskById({ id: props.id, label: props.label, checked: props.checked })
   }
 
   return ( // * Note: Components must always return something...

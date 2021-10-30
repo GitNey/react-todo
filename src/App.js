@@ -34,17 +34,23 @@ function App(props) {
   )
     
   function addNewTask (label) {
-    setTasks([...props.tasks, {
-      id: props.tasks.length - 1,
+    window.console.log('Adding task...')
+    const newList = tasks.concat({
+      id: tasks.length,
       label,
       checked: false
-    }])
+    })
+    setTasks(newList)
   }
 
-  function removeTaskById (id) {
-    setTasks([...props.tasks.filter(task => {
-      return task.id !== id
-    })])
+  function removeTaskById (task) {
+    window.console.log(task, tasks)
+    const inList = tasks.find(_task => task.id === _task.id)
+    // window.console.log('idx:', idx)
+    if (inList) {
+      const newList = tasks.filter(_task => task.id !== _task.id)
+      setTasks(newList)
+    }
   }
 
   return (

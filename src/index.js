@@ -4,11 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const DATA = [
-  { id: 0, label: 'Eat', checked: true },
-  { id: 1, label: 'Learn React.js', checked: false },
-  { id: 3, label: '100 push-ups', checked: false }
-]
+const DATA = []
 
 ReactDOM.render(
   <React.StrictMode>
