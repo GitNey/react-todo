@@ -1,19 +1,33 @@
 // 1) imports
 import React from 'react'
+import { useState } from 'react'
 
 function Todo (props) {
   // 2) logic
+  const [checked, setChecked] = useState(props.checked)
+
   function handleDeleteClick (e) {
     e.preventDefault()
     props.removeTaskById({ id: props.id, label: props.label, checked: props.checked })
+  }
+
+  function handleTaskChecked (e) {
+    const val = (e.target.value)
+    if (val === 'on') {
+      setChecked('off')
+    } else {
+      setChecked('on')
+    }
   }
 
   return ( // * Note: Components must always return something...
     // 3) template
     <li className="todo stack-small">
       <div className="c-cb">
-        <input id={`todo-${props.id}`} type="checkbox" defaultChecked={props.checked} />
-        <label className="todo-label" htmlFor={`todo-${props.id}`}>{props.label}</label>
+        <input id={`todo-${props.id}`} type="checkbox" onChange={handleTaskChecked} value={checked} />
+        <label className="todo-label" htmlFor={`todo-${props.id}`}>          
+          { checked === 'on' ? <strike>{props.label}</strike> : props.label }
+        </label>
       </div>
       <div className="btn-group">
         <button type="button" className="btn">
