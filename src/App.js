@@ -1,16 +1,20 @@
 // Top-level import statements
 import Todo from './components/Todo.js'
 import NewTodoForm from './components/NewTodoForm.js'
-import FilterButtons from './components/FilterButtons.js'
+import FilterButton from './components/FilterButton.js'
+
+import { useState } from 'react'
+
 
 // App-code
 function App(props) {
+  const [tasks, setTasks] = useState(props.tasks)
   /**
    * Rendering w/ Iteration:
    * To render our array of objects, we have to turn each into a <Todo /> component.
    * JS gives us an array method for transforming data into something else: Array.prototype.map()
    */
-  const taskList = props.tasks.map(
+  const taskList = tasks.map(
     /**
      * Unique Keys:
      * Now that React is rendering out tasks out of an array, it has to keep track of which one is which in order
@@ -19,8 +23,30 @@ function App(props) {
      * 
      * YOU SHOULD ALWAYS PASS A UNIQUE KEY TO ANYTHING YOU RENDER W/ ITERATION. (Reactivity)
      */
-    task => <Todo id={task.id} label={task.label} checked={task.checked} key={task.id} />
+    task => 
+      <Todo
+        id={task.id}
+        label={task.label}
+        checked={task.checked}
+        key={task.id}
+        removeTaskById={removeTaskById}
+      />
   )
+    
+  function addNewTask (label) {
+    setTasks([...props.tasks, {
+      id: props.tasks.length - 1,
+      label,
+      checked: false
+    }])
+  }
+
+  function removeTaskById (id) {
+    setTasks([...props.tasks.filter(task => {
+      return task.id !== id
+    })])
+  }
+
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
@@ -32,9 +58,11 @@ function App(props) {
        * we can make two more components: 
        */
       }
-      <NewTodoForm />
+      <NewTodoForm addNewTask={addNewTask} />
       {/* An array of buttons to be used for filtering of the list. */}
-      <FilterButtons />
+      <div className="filters btn-group stack-exception">
+        <FilterButton />
+      </div>
       {/* Amount of remaining tasks. */}
       <h2 id="list-heading">
         3 tasks remaining

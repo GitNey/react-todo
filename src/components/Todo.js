@@ -3,6 +3,11 @@ import React from 'react'
 
 function Todo (props) {
   // 2) logic
+  function handleDeleteClick (e) {
+    e.preventDefault()
+    props.removeTaskById(props.id)
+  }
+
   return ( // * Note: Components must always return something...
     // 3) template
     <li className="todo stack-small">
@@ -14,7 +19,7 @@ function Todo (props) {
         <button type="button" className="btn">
           Edit <span className="visually-hidden">{props.label}</span>
         </button>
-        <button type="button" className="btn btn__danger">
+        <button type="button" className="btn btn__danger" onClick={handleDeleteClick}>
           Delete <span className="visually-hidden">{props.label}</span>
         </button>
       </div>
