@@ -1,5 +1,7 @@
 // Top-level import statements
 import Todo from './components/Todo.js'
+import NewTodoForm from './components/NewTodoForm.js'
+import FilterButtons from './components/FilterButtons.js'
 
 // App-code
 function App(props) {
@@ -23,42 +25,16 @@ function App(props) {
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
       {/* Form element, with input type text for writing out new task, and a button to submit the task. */}
-      <form>
-        <h2 className="label-wrapper">
-          <label htmlFor="new-todo-input" className="label__lg">
-            What needs to be done?
-          </label>
-        </h2>
-        <input
-          type="text"
-          id="new-todo-input"
-          className="input input__lg"
-          name="text"
-          autoComplete="off"
-        />
-        <button type="submit" className="btn btn__primary btn__lg">
-          Add
-        </button>
-      </form>
+      {
+       /** 
+       * Componentizing the rest of the app...
+       * Remembering that compoennts are either obvious UI chunks, or reusable pieces of UI, or both...
+       * we can make two more components: 
+       */
+      }
+      <NewTodoForm />
       {/* An array of buttons to be used for filtering of the list. */}
-      <div className="filters btn-group stack-exception">
-        <button type="button" className="btn toggle-btn" aria-pressed="true">
-          <span className="visually-hidden">Show </span>
-          <span>All</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        <button type="button" className="btn toggle-btn" aria-pressed="true">
-          <span className="visually-hidden">Show </span>
-          <span>Active</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-        {/* Accessibility features, tells screen readers when button is pressed... */}
-        <button type="button" className="btn toggle-btn" aria-pressed="true">
-          <span className="visually-hidden">Show </span>
-          <span>Completed</span>
-          <span className="visually-hidden"> tasks</span>
-        </button>
-      </div>
+      <FilterButtons />
       {/* Amount of remaining tasks. */}
       <h2 id="list-heading">
         3 tasks remaining
@@ -69,9 +45,6 @@ function App(props) {
         aria-labelledby="list-heading"
       >
         {taskList}
-        {/* <Todo id={1} checked={true} label={"Eat"} />
-        <Todo id={2} checked={false} label={"Learn React.js"} />
-        <Todo id={3} checked={false} label={"Do 100 push-ups"} /> */}
       </ul>
     </div>
   )
