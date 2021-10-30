@@ -2,6 +2,7 @@
 import Todo from './components/Todo.js'
 import NewTodoForm from './components/NewTodoForm.js'
 import FilterButton from './components/FilterButton.js'
+import { nanoid } from 'nanoid'
 
 import { useState } from 'react'
 
@@ -36,7 +37,7 @@ function App(props) {
   function addNewTask (label) {
     window.console.log('Adding task...')
     const newList = tasks.concat({
-      id: tasks.length,
+      id: nanoid(),
       label,
       checked: false
     })
